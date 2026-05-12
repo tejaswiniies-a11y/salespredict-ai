@@ -19,8 +19,9 @@ const viewsDir = path.join(publicDir, "views");
 
 const uploadsDir = path.join(__dirname, "..", "uploads");
 const reportsDir = path.join(__dirname, "..", "reports");
+const isProductionRuntime = Boolean(process.env.VERCEL || process.env.NODE_ENV === "production");
 
-if (!fs.existsSync(uploadsDir)) {
+if (!isProductionRuntime && !fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 

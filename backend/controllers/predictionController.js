@@ -1,4 +1,6 @@
 const fs = require("fs");
+const path = require("path");
+const { Readable } = require("stream");
 const csv = require("csv-parser");
 const Prediction = require("../models/Prediction");
 const DatasetUpload = require("../models/DatasetUpload");
@@ -28,6 +30,15 @@ function normalizeHeader(value) {
     .trim()
     .toLowerCase()
     .replace(/[_\s-]+/g, "_");
+}
+
+function isProductionRuntime() {
+  return Boolean(process.env.VERCEL || process.env.NODE_ENV === "production");
+}
+
+function createUploadedFilename(originalName = "dataset.csv") {
+  const extension = path.extname(originalName) || ".csv";
+  return `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
 }
 
 function findHeaderKey(headerMap, aliases) {
@@ -78,14 +89,14 @@ function buildNormalizedRow(rawRow, headerMap, matched) {
   };
 }
 
-function normalizeDatasetCsv(filePath) {
+function normalizeDatasetCsvStream(streamFactory, filePath) {
   return new Promise((resolve, reject) => {
     const rows = [];
     let matchedHeaders = null;
     let headerMap = null;
     let validatedHeaders = false;
 
-    fs.createReadStream(filePath)
+    streamFactory()
       .pipe(csv())
       .on("headers", (headers) => {
         validatedHeaders = true;
@@ -150,16 +161,19 @@ function normalizeDatasetCsv(filePath) {
           );
         }
 
-        const normalizedPath = filePath.replace(/\.csv$/i, "-normalized.csv");
-        const normalizedCsv = [
-          "marketing_spend,store_visitors,discount,seasonality_index,sales",
-          ...validRows.map(
-            (row) =>
-              `${row.marketing_spend},${row.store_visitors},${row.discount},${row.seasonality_index},${row.sales}`
-          ),
-        ].join("\n");
+        let normalizedPath = null;
+        if (filePath) {
+          normalizedPath = filePath.replace(/\.csv$/i, "-normalized.csv");
+          const normalizedCsv = [
+            "marketing_spend,store_visitors,discount,seasonality_index,sales",
+            ...validRows.map(
+              (row) =>
+                `${row.marketing_spend},${row.store_visitors},${row.discount},${row.seasonality_index},${row.sales}`
+            ),
+          ].join("\n");
 
-        fs.writeFileSync(normalizedPath, normalizedCsv, "utf-8");
+          fs.writeFileSync(normalizedPath, normalizedCsv, "utf-8");
+        }
 
         return resolve({ rowCount: validRows.length, normalizedPath });
       })
@@ -167,6 +181,14 @@ function normalizeDatasetCsv(filePath) {
         reject(error);
       });
   });
+}
+
+function normalizeDatasetCsvFromFile(filePath) {
+  return normalizeDatasetCsvStream(() => fs.createReadStream(filePath), filePath);
+}
+
+function normalizeDatasetCsvFromBuffer(buffer) {
+  return normalizeDatasetCsvStream(() => Readable.from(buffer), null);
 }
 
 exports.createPrediction = async (req, res) => {
@@ -231,20 +253,24 @@ exports.uploadDataset = async (req, res) => {
       return res.status(400).json({ success: false, message: "CSV file is required." });
     }
 
-    const { rowCount, normalizedPath } = await normalizeDatasetCsv(req.file.path);
+    const uploadedFilename = req.file.filename || createUploadedFilename(req.file.originalname);
+    const isProduction = isProductionRuntime();
+    const { rowCount, normalizedPath } = isProduction
+      ? await normalizeDatasetCsvFromBuffer(req.file.buffer)
+      : await normalizeDatasetCsvFromFile(req.file.path);
 
     const datasetUpload = await DatasetUpload.create({
       user: req.user._id,
-      filename: req.file.filename,
+      filename: uploadedFilename,
       originalName: req.file.originalname,
       rowCount,
     });
 
-    const trainResponse = await trainModel(normalizedPath);
+    const trainResponse = await trainModel(normalizedPath || uploadedFilename);
 
     return res.status(201).json({
       success: true,
-      message: "Dataset uploaded and model trained successfully.",
+      message: trainResponse.message || "Dataset uploaded and model trained successfully.",
       datasetUpload,
       trainResponse,
     });
