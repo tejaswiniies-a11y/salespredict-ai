@@ -11,6 +11,7 @@ const authRoutes = require("./routes/authRoutes");
 const predictionRoutes = require("./routes/predictionRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const reportRoutes = require("./routes/reportRoutes");
+const connectDB = require("./config/db");
 
 const app = express();
 const publicDir = path.join(__dirname, "..", "frontend", "public");
@@ -39,6 +40,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(publicDir));
 
+app.get("/api/health", (req, res) => {
+  res.json({ success: true, message: "Server is running." });
+});
+
+app.use("/api", async (req, res, next) => {
+  try {
+    await connectDB();
+    return next();
+  } catch (error) {
+    console.error("API database initialization failed:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Database connection failed.",
+    });
+  }
+});
+
 app.use(
   "/api",
   rateLimit({
@@ -54,10 +72,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/predictions", predictionRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/reports", reportRoutes);
-
-app.get("/api/health", (req, res) => {
-  res.json({ success: true, message: "Server is running." });
-});
 
 app.use((req, res) => {
   if (req.path.startsWith("/api/")) {

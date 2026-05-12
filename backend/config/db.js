@@ -12,11 +12,12 @@ async function connectDB() {
   }
 
   try {
-    if (!process.env.MONGODB_URI) {
-      throw new Error("MONGODB_URI is not configured.");
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    if (!mongoUri) {
+      throw new Error("MongoDB connection string is not configured. Set MONGODB_URI or MONGO_URI.");
     }
 
-    connectionPromise = mongoose.connect(process.env.MONGODB_URI, {
+    connectionPromise = mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
       bufferCommands: false,

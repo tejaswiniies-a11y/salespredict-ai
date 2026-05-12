@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     console.error("Vercel function startup failed:", error);
     return res.status(500).json({
       success: false,
-      message: "Server initialization failed.",
+      message: error.message || "Server initialization failed.",
     });
   }
 };

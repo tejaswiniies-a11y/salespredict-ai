@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const connectDB = require("./backend/config/db");
 const app = require("./backend/app");
 
 dotenv.config();
@@ -9,8 +8,6 @@ let serverStarted = false;
 
 async function startServer() {
   try {
-    await connectDB();
-
     if (serverStarted) {
       return app;
     }
@@ -34,7 +31,7 @@ async function startServer() {
       process.exit(1);
     });
   } catch (error) {
-    console.error("Startup failed:", error.message);
+    console.error("Startup failed:", error);
     if (process.env.NODE_ENV !== "production") {
       process.exit(1);
     }
