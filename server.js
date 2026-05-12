@@ -5,14 +5,24 @@ const app = require("./backend/app");
 dotenv.config();
 
 const PORT = Number(process.env.PORT) || 5000;
+let serverStarted = false;
 
 async function startServer() {
   try {
     await connectDB();
 
+    if (serverStarted) {
+      return app;
+    }
+
+    if (process.env.NODE_ENV === "production") {
+      return app;
+    }
+
     const server = app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
+    serverStarted = true;
 
     server.on("error", (error) => {
       if (error.code === "EADDRINUSE") {
@@ -25,8 +35,15 @@ async function startServer() {
     });
   } catch (error) {
     console.error("Startup failed:", error.message);
-    process.exit(1);
+    if (process.env.NODE_ENV !== "production") {
+      process.exit(1);
+    }
+    throw error;
   }
 }
 
-startServer();
+if (process.env.NODE_ENV !== "production") {
+  startServer();
+}
+
+module.exports = { app, startServer };

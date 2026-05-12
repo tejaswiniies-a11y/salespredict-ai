@@ -13,6 +13,8 @@ const adminRoutes = require("./routes/adminRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 
 const app = express();
+const publicDir = path.join(__dirname, "..", "frontend", "public");
+const viewsDir = path.join(publicDir, "views");
 
 const uploadsDir = path.join(__dirname, "..", "uploads");
 const reportsDir = path.join(__dirname, "..", "reports");
@@ -35,7 +37,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "..", "frontend", "public")));
+app.use(express.static(publicDir));
 
 app.use(
   "/api",
@@ -66,11 +68,14 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error("Unhandled app error:", err);
   res.status(err.status || 500).json({
     success: false,
     message: err.message || "Internal server error.",
   });
 });
+
+app.locals.publicDir = publicDir;
+app.locals.viewsDir = viewsDir;
 
 module.exports = app;
