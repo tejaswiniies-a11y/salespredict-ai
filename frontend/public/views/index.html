@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SalesPredict AI | Intelligent Sales Forecasting</title>
+    <meta
+      name="description"
+      content="SalesPredict AI is a machine learning sales forecasting platform for upload, training, prediction, analytics, and downloadable reports."
+    />
+    <meta property="og:title" content="SalesPredict AI | Intelligent Sales Forecasting" />
+    <meta
+      property="og:description"
+      content="Upload CSV data, train your model, predict future sales, and present insights with a polished ML dashboard."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark"><i class="fas fa-chart-line"></i></span>
+          <span>SalesPredict AI</span>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" data-nav-links>
+          <a href="#workflow">Workflow</a>
+          <a href="#features">Features</a>
+          <a href="#dashboard-preview">Dashboard</a>
+          <a href="/about">About</a>
+          <a href="/login">Login</a>
+          <a href="/register" class="btn">Get Started <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <h1>
+            Turn raw retail data into
+            <span class="gradient-text">confident sales decisions.</span>
+          </h1>
+          <p class="lead">
+            SalesPredict AI brings forecasting, CSV model retraining, dashboard analytics, and clean report exports
+            into one modern machine learning workspace built for presentations, demos, and real business insight.
+          </p>
+          <div class="hero-actions">
+            <a href="/register" class="btn"><i class="fas fa-rocket"></i> Launch Platform</a>
+            <a href="#workflow" class="btn btn-ghost"><i class="fas fa-play"></i> Explore Workflow</a>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-badge">
+              <span class="tiny">Forecast Pipeline</span>
+              <strong>CSV to AI in minutes</strong>
+            </div>
+            <div class="hero-badge">
+              <span class="tiny">Reporting</span>
+              <strong>PDF + CSV exports</strong>
+            </div>
+            <div class="hero-badge">
+              <span class="tiny">Visualization</span>
+              <strong>Interactive Chart.js views</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal stagger-1">
+          <div class="preview-toolbar">
+            <div>
+              <span class="eyebrow"><i class="fas fa-chart-pie"></i> Live Product Mix</span>
+              <h2 class="section-title" style="font-size: 1.7rem;">Forecast Snapshot</h2>
+            </div>
+            <div class="preview-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="dashboard-summary">
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-wallet"></i></div>
+              <span class="summary-note">Projected Revenue</span>
+              <strong>$84.2K</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-signal"></i></div>
+              <span class="summary-note">Model Confidence</span>
+              <strong>94.8%</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-mobile-screen-button"></i></div>
+              <span class="summary-note">Top Segment</span>
+              <strong>Mobile</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-file-arrow-down"></i></div>
+              <span class="summary-note">Reports Ready</span>
+              <strong>CSV + PDF</strong>
+            </article>
+          </div>
+          <div class="mini-chart-shell">
+            <canvas id="landingPreviewChart"></canvas>
+          </div>
+          <div class="mini-list">
+            <span><i class="fas fa-circle-check"></i> Predict sales with spend, visitors, discount, and seasonality inputs</span>
+            <span><i class="fas fa-circle-check"></i> Upload new CSV datasets to retrain the ML model when market conditions change</span>
+            <span><i class="fas fa-circle-check"></i> Present polished analytics screenshots to faculty, panel members, or stakeholders</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-shell" id="workflow">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow"><i class="fas fa-gears"></i> AI Sales Forecast Workflow</span>
+          <h2 class="section-title">Upload CSV, retrain, predict, and export in one guided flow</h2>
+          <p class="lead">
+            The workflow mirrors a practical analytics lifecycle, making it easy to explain both the machine learning
+            logic and the user journey during a project viva or report presentation.
+          </p>
+        </div>
+        <div class="workflow-grid">
+          <article class="card workflow-card reveal">
+            <span class="step-count">1</span>
+            <div class="step-icon"><i class="fas fa-file-csv"></i></div>
+            <h3>Upload CSV Dataset</h3>
+            <p class="muted">Bring in structured sales records with product, traffic, discount, and seasonal drivers.</p>
+          </article>
+          <article class="card workflow-card reveal stagger-1">
+            <span class="step-count">2</span>
+            <div class="step-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Train Model</h3>
+            <p class="muted">Refresh the machine learning model using recent business data to improve relevance.</p>
+          </article>
+          <article class="card workflow-card reveal stagger-2">
+            <span class="step-count">3</span>
+            <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Predict Sales</h3>
+            <p class="muted">Generate forecast values instantly from operational inputs and preserve the results in history.</p>
+          </article>
+          <article class="card workflow-card reveal stagger-3">
+            <span class="step-count">4</span>
+            <div class="step-icon"><i class="fas fa-file-export"></i></div>
+            <h3>Download Report</h3>
+            <p class="muted">Export polished CSV and PDF reports for analysis, submission, or management review.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell" id="features">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow"><i class="fas fa-star"></i> Features With Business Value</span>
+          <h2 class="section-title">Built to look premium and explain the project clearly</h2>
+          <p class="lead">
+            Every section is designed to communicate technical capability and business usefulness at the same time.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="card feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-shield-heart"></i></div>
+            <h3>Secure Authentication</h3>
+            <p class="muted">JWT-based access control keeps user and admin workflows separated cleanly and professionally.</p>
+          </article>
+          <article class="card feature-card reveal stagger-1">
+            <div class="feature-icon"><i class="fas fa-sliders"></i></div>
+            <h3>Prediction Inputs</h3>
+            <p class="muted">Marketing spend, store visitors, discount, and seasonality make the forecasting logic easy to justify.</p>
+          </article>
+          <article class="card feature-card reveal stagger-2">
+            <div class="feature-icon"><i class="fas fa-chart-column"></i></div>
+            <h3>Interactive Charts</h3>
+            <p class="muted">Trend charts help explain model output visually for dashboard demos and report screenshots.</p>
+          </article>
+          <article class="card feature-card reveal stagger-3">
+            <div class="feature-icon"><i class="fas fa-file-lines"></i></div>
+            <h3>Downloadable Reports</h3>
+            <p class="muted">One-click CSV and PDF export makes the project feel complete and useful in real workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow"><i class="fas fa-boxes-stacked"></i> Product Category Visuals</span>
+          <h2 class="section-title">Forecast across the categories businesses care about most</h2>
+          <p class="lead">
+            The platform can present prediction use cases for electronics, mobile, laptop, grocery, and fashion in a clean visual way.
+          </p>
+        </div>
+        <div class="category-grid">
+          <article class="card category-card reveal">
+            <div class="category-icon"><i class="fas fa-tv"></i></div>
+            <h3>Electronics</h3>
+            <p class="muted">Track seasonal demand spikes, campaign lift, and large-ticket product planning with better confidence.</p>
+          </article>
+          <article class="card category-card reveal stagger-1">
+            <div class="category-icon"><i class="fas fa-mobile-screen"></i></div>
+            <h3>Mobile</h3>
+            <p class="muted">Estimate launch demand, festive discounts, and visitor-driven sales conversion for fast-moving devices.</p>
+          </article>
+          <article class="card category-card reveal stagger-2">
+            <div class="category-icon"><i class="fas fa-laptop"></i></div>
+            <h3>Laptop</h3>
+            <p class="muted">Support inventory and pricing decisions for student, office, and premium computing segments.</p>
+          </article>
+          <article class="card category-card reveal stagger-3">
+            <div class="category-icon"><i class="fas fa-basket-shopping"></i></div>
+            <h3>Grocery</h3>
+            <p class="muted">Use high-footfall and promotion-based patterns to project practical daily and weekly demand shifts.</p>
+          </article>
+          <article class="card category-card reveal">
+            <div class="category-icon"><i class="fas fa-shirt"></i></div>
+            <h3>Fashion</h3>
+            <p class="muted">Visualize how trend cycles, marketing campaigns, and discount periods change category performance.</p>
+          </article>
+          <article class="card category-card reveal stagger-1">
+            <div class="category-icon"><i class="fas fa-layer-group"></i></div>
+            <h3>Multi-Category Planning</h3>
+            <p class="muted">Compare categories together and explain where ML forecasting adds the most value in retail strategy.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell" id="dashboard-preview">
+      <div class="container dashboard-shell">
+        <div class="card dashboard-preview reveal">
+          <div class="preview-toolbar">
+            <div>
+              <span class="eyebrow"><i class="fas fa-gauge-high"></i> Dashboard Preview</span>
+              <h2 class="section-title" style="font-size: 2rem;">Executive snapshot for your presentation</h2>
+            </div>
+            <span class="pill">Real-time style layout</span>
+          </div>
+          <div class="dashboard-summary">
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-sack-dollar"></i></div>
+              <span class="summary-note">Total Sales</span>
+              <strong>$2.45M</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-chart-line"></i></div>
+              <span class="summary-note">Predicted Sales</span>
+              <strong>$2.71M</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-bullseye"></i></div>
+              <span class="summary-note">Accuracy</span>
+              <strong>94.8%</strong>
+            </article>
+            <article class="summary-card">
+              <div class="summary-icon"><i class="fas fa-crown"></i></div>
+              <span class="summary-note">Best Category</span>
+              <strong>Electronics</strong>
+            </article>
+          </div>
+          <div class="preview-grid">
+            <div class="mini-chart-shell">
+              <canvas id="landingCategoryChart"></canvas>
+            </div>
+            <div class="mini-chart-shell">
+              <div class="mini-list">
+                <span><i class="fas fa-circle-check"></i> Dashboard cards highlight KPIs for total sales, predictions, accuracy, and category strength</span>
+                <span><i class="fas fa-circle-check"></i> Chart blocks make the interface look practical rather than purely theoretical</span>
+                <span><i class="fas fa-circle-check"></i> Tables, reports, and filters keep the app suitable for a final project demonstration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal stagger-2">
+          <span class="eyebrow"><i class="fas fa-lightbulb"></i> Why SalesPredict AI Is Useful</span>
+          <h2 class="section-title" style="font-size: 2rem;">Useful for both business users and academic evaluation</h2>
+          <div class="why-grid">
+            <article class="card why-card">
+              <div class="feature-icon"><i class="fas fa-clock-rotate-left"></i></div>
+              <h3>Faster Decisions</h3>
+              <p class="muted">Managers do not need to wait for manual spreadsheet forecasting to understand expected outcomes.</p>
+            </article>
+            <article class="card why-card">
+              <div class="feature-icon"><i class="fas fa-database"></i></div>
+              <h3>Data-Driven Logic</h3>
+              <p class="muted">The project clearly shows how machine learning uses historical data to improve planning quality.</p>
+            </article>
+            <article class="card why-card">
+              <div class="feature-icon"><i class="fas fa-users-viewfinder"></i></div>
+              <h3>Presentation Friendly</h3>
+              <p class="muted">A richer UI makes screenshots, walkthroughs, and viva explanations look more mature and complete.</p>
+            </article>
+            <article class="card why-card">
+              <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+              <h3>Real-World Fit</h3>
+              <p class="muted">Retail forecasting, dataset uploads, and report exports make the app feel like a practical business tool.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-grid footer-grid-reference">
+            <div class="footer-left">
+              <div class="footer-brand">
+                <span class="footer-logo">SP</span>
+                <div>
+                  <strong class="highlight-text footer-project-name">SalesPredict AI</strong>
+                  <p class="footer-subtitle">AI-powered sales forecasting system</p>
+                </div>
+              </div>
+              <p class="footer-description">
+                AI-powered sales forecasting system for smarter business decisions, sales trend analysis, CSV-based
+                prediction, and ML-based forecasting.
+              </p>
+              <div class="footer-contact-list">
+                <a href="mailto:support@salespredictai.com"><i class="fas fa-envelope"></i> support@salespredictai.com</a>
+                <a href="tel:+917337731767"><i class="fas fa-phone"></i> +91 7337731767</a>
+              </div>
+            </div>
+
+            <div class="footer-right">
+              <div class="footer-links-block">
+                <h3>Quick Links</h3>
+                <div class="footer-links-list">
+                  <a href="/">Home</a>
+                  <a href="/dashboard">Dashboard</a>
+                  <a href="/dashboard">Predict Sales</a>
+                  <a href="/dashboard">Reports</a>
+                  <a href="/about">About</a>
+                  <a href="/login">Login</a>
+                  <a href="mailto:support@salespredictai.com">Contact</a>
+                </div>
+              </div>
+
+              <div class="footer-links-block">
+                <h3>Follow Us</h3>
+                <div class="footer-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+                    <i class="fab fa-x-twitter"></i>
+                  </a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+                <div class="footer-bottom-links">
+                  <a href="/terms">Terms</a>
+                  <a href="/privacy">Privacy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span>© 2026 SalesPredict AI. All rights reserved.</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

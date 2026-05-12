@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | SalesPredict AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark"><i class="fas fa-chart-line"></i></span>
+          <span>SalesPredict AI</span>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" data-nav-links>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/register">Register</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="auth-shell">
+      <div class="container auth-grid">
+        <div class="auth-feature reveal">
+          <span class="eyebrow"><i class="fas fa-lock"></i> Secure Access</span>
+          <h1 class="section-title">Sign in to your forecasting workspace</h1>
+          <p class="lead">
+            Continue to your dashboard to create predictions, retrain the model with new CSV data, and export reports.
+          </p>
+          <div class="feature-list">
+            <span><i class="fas fa-circle-check"></i> JWT-protected user and admin routes</span>
+            <span><i class="fas fa-circle-check"></i> AI sales prediction history and charts</span>
+            <span><i class="fas fa-circle-check"></i> Presentation-ready dashboard layouts</span>
+          </div>
+        </div>
+
+        <div class="auth-card reveal stagger-1">
+          <span class="eyebrow"><i class="fas fa-right-to-bracket"></i> Welcome Back</span>
+          <h2 class="section-title">Login</h2>
+          <div id="loginMessage" class="message"></div>
+          <form id="loginForm">
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" placeholder="Enter password" required />
+            </label>
+            <button type="submit"><i class="fas fa-arrow-right-to-bracket"></i> Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

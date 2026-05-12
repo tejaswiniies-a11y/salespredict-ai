@@ -1,0 +1,34 @@
+[
+  {
+    "productName": "Laptop",
+    "productCategory": "Electronics"
+  },
+  {
+    "productName": "Smartphone",
+    "productCategory": "Mobile"
+  },
+  {
+    "productName": "LED TV",
+    "productCategory": "Electronics"
+  },
+  {
+    "productName": "Gaming Laptop",
+    "productCategory": "Laptop"
+  },
+  {
+    "productName": "Rice Pack",
+    "productCategory": "Grocery"
+  },
+  {
+    "productName": "T-Shirt",
+    "productCategory": "Fashion"
+  },
+  {
+    "productName": "Headphones",
+    "productCategory": "Electronics"
+  },
+  {
+    "productName": "Jeans",
+    "productCategory": "Fashion"
+  }
+]

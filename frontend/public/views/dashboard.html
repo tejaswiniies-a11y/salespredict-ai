@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard | SalesPredict AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div id="toastContainer" style="position: fixed; top: 88px; right: 16px; z-index: 80;"></div>
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark"><i class="fas fa-chart-line"></i></span>
+          <span>SalesPredict AI</span>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" data-nav-links>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/admin" data-admin-link style="display: none">Admin</a>
+          <button data-logout type="button">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container dashboard-grid" id="userDashboard">
+      <section class="card span-12 reveal">
+        <span class="eyebrow"><i class="fas fa-sparkles"></i> Sales Command Center</span>
+        <h1 class="section-title">Welcome back, <span data-user-name>User</span></h1>
+        <p class="lead">Manage predictions, model training, category trends, and downloadable reports from one premium dashboard.</p>
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-sack-dollar"></i> Total Sales</div>
+            <strong id="totalSales">0</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-chart-line"></i> Predicted Sales</div>
+            <strong id="latestPrediction">0</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-bullseye"></i> Accuracy</div>
+            <strong id="predictionAccuracy">94.8%</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-crown"></i> Best Category</div>
+            <strong id="bestCategory">N/A</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card span-7 reveal">
+        <span class="eyebrow"><i class="fas fa-sliders"></i> Prediction Form</span>
+        <h2 class="section-title">Predict Future Sales</h2>
+        <p class="muted">Use category and business indicators to estimate upcoming sales performance instantly.</p>
+        <div id="predictionMessage" class="message"></div>
+        <form id="predictionForm">
+          <div class="form-grid">
+            <label>
+              Product Name
+              <select name="productName" id="productNameSelect" required>
+                <option value="">Select product</option>
+              </select>
+            </label>
+            <label>
+              Product Category
+              <select name="productCategory" id="productCategorySelect" required>
+                <option value="">Select category</option>
+              </select>
+            </label>
+            <label>
+              Marketing Spend
+              <input type="number" name="marketingSpend" min="0" step="0.01" placeholder="12000" required />
+            </label>
+            <label>
+              Store Visitors
+              <input type="number" name="storeVisitors" min="0" placeholder="450" required />
+            </label>
+            <label>
+              Discount (%)
+              <input type="number" name="discount" min="0" max="100" step="0.01" placeholder="10" required />
+            </label>
+            <label style="grid-column: 1 / -1;">
+              Seasonality Index
+              <input type="number" name="seasonalityIndex" min="0" step="0.01" placeholder="1.15" required />
+            </label>
+          </div>
+          <div class="actions-row">
+            <button type="submit"><i class="fas fa-wand-magic-sparkles"></i> Generate Prediction</button>
+            <button type="reset" class="btn btn-ghost"><i class="fas fa-rotate-left"></i> Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card span-5 reveal stagger-1">
+        <span class="eyebrow"><i class="fas fa-file-arrow-up"></i> Dataset Upload</span>
+        <h2 class="section-title">Retrain Model with CSV</h2>
+        <p class="muted">Upload fresh retail data to keep your regression model aligned with current sales behavior.</p>
+        <div id="uploadMessage" class="message"></div>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <label>
+            Upload CSV Dataset
+            <input type="file" name="dataset" accept=".csv" />
+          </label>
+          <button type="submit" class="btn-secondary"><i class="fas fa-microchip"></i> Upload and Train</button>
+        </form>
+        <div class="mini-list">
+          <span><i class="fas fa-circle-check"></i> Supports CSV datasets used in the ML training pipeline</span>
+          <span><i class="fas fa-circle-check"></i> Keeps your demo aligned with a real-world retraining workflow</span>
+        </div>
+      </section>
+
+      <section class="card span-8 chart-card reveal">
+        <span class="eyebrow"><i class="fas fa-chart-area"></i> Sales Trend</span>
+        <h2 class="section-title">Recent Prediction Trend</h2>
+        <div class="chart-area">
+          <canvas id="predictionChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card span-4 reveal stagger-2">
+        <span class="eyebrow"><i class="fas fa-layer-group"></i> Quick Insights</span>
+        <h2 class="section-title">Dashboard Summary</h2>
+        <div class="feature-list">
+          <span><i class="fas fa-circle-check"></i> Total predictions tracked: <strong id="historyCount">0</strong></span>
+          <span><i class="fas fa-circle-check"></i> Report exports available in both CSV and PDF formats</span>
+          <span><i class="fas fa-circle-check"></i> Built for polished major project screenshots and walkthroughs</span>
+        </div>
+        <div class="actions-row" style="margin-top: 1.3rem;">
+          <button id="downloadCsv" type="button"><i class="fas fa-file-csv"></i> Download CSV</button>
+          <button id="downloadPdf" type="button" class="btn-secondary"><i class="fas fa-file-pdf"></i> Download PDF</button>
+        </div>
+      </section>
+
+      <section class="card span-12 table-card reveal">
+        <span class="eyebrow"><i class="fas fa-clock-rotate-left"></i> Prediction History</span>
+        <h2 class="section-title">Forecast Records</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Spend</th>
+                <th>Visitors</th>
+                <th>Discount</th>
+                <th>Seasonality</th>
+                <th>Predicted Sales</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr>
+                <td colspan="8">Loading prediction history...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

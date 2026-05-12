@@ -1,0 +1,33 @@
+{
+  "features": {
+    "marketing_spend": {
+      "slope": 1.9864864864864864,
+      "intercept": 1824.3243243243269,
+      "mse": 220720.72072072
+    },
+    "store_visitors": {
+      "slope": 64.61538461538461,
+      "intercept": -1923.076923076922,
+      "mse": 2512820.512820513
+    },
+    "discount": {
+      "slope": -1400.0,
+      "intercept": 39000.0,
+      "mse": 0.0
+    },
+    "seasonality_index": {
+      "slope": 140000.00000000017,
+      "intercept": -136000.00000000023,
+      "mse": 1.6940658945086007e-21
+    }
+  },
+  "weights": {
+    "marketing_spend": 2.2653061224489816e-15,
+    "store_visitors": 1.989795918367342e-16,
+    "discount": 0.4999999999999987,
+    "seasonality_index": 0.4999999999999987
+  },
+  "baseline_component": 3000.0,
+  "trained_on": 3,
+  "source": "1778566132834-839748740-normalized.csv"
+}

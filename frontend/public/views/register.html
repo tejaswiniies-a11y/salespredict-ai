@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | SalesPredict AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark"><i class="fas fa-chart-line"></i></span>
+          <span>SalesPredict AI</span>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" data-nav-links>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/login">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="auth-shell">
+      <div class="container auth-grid">
+        <div class="auth-feature reveal">
+          <span class="eyebrow"><i class="fas fa-user-plus"></i> Create Account</span>
+          <h1 class="section-title">Start forecasting with a polished AI workflow</h1>
+          <p class="lead">
+            Register once to access user forecasting tools, history tracking, CSV upload training, and exportable reports.
+          </p>
+          <div class="feature-list">
+            <span><i class="fas fa-circle-check"></i> Clean dashboard cards for key sales metrics</span>
+            <span><i class="fas fa-circle-check"></i> Responsive layouts for laptop and mobile demo use</span>
+            <span><i class="fas fa-circle-check"></i> Modern UI designed for BCA major project evaluation</span>
+          </div>
+        </div>
+
+        <div class="auth-card reveal stagger-1">
+          <span class="eyebrow"><i class="fas fa-id-badge"></i> Create Account</span>
+          <h2 class="section-title">Register</h2>
+          <div id="registerMessage" class="message"></div>
+          <form id="registerForm">
+            <label>
+              Full Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" placeholder="Create password" minlength="6" required />
+            </label>
+            <button type="submit"><i class="fas fa-user-check"></i> Register</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

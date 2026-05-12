@@ -1,0 +1,22 @@
+# Environment variables - never commit secrets
+.env
+
+# Dependencies
+node_modules/
+
+# Uploads & generated reports
+uploads/
+reports/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

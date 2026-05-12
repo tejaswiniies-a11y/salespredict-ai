@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | SalesPredict AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark"><i class="fas fa-chart-line"></i></span>
+          <span>SalesPredict AI</span>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" data-nav-links>
+          <a href="/">Home</a>
+          <a href="/dashboard">User Dashboard</a>
+          <a href="/admin">Admin</a>
+          <button data-logout type="button">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container dashboard-grid" id="adminDashboard">
+      <section class="card span-12 reveal">
+        <span class="eyebrow"><i class="fas fa-user-shield"></i> Admin Overview</span>
+        <h1 class="section-title">System Analytics Dashboard</h1>
+        <p class="lead">Monitor platform growth, model adoption, recent accounts, and prediction activity with a cleaner executive layout.</p>
+        <div id="adminMessage" class="message"></div>
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-users"></i> Users</div>
+            <strong id="totalUsers">0</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-user-tie"></i> Admins</div>
+            <strong id="totalAdmins">0</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-chart-column"></i> Predictions</div>
+            <strong id="totalPredictions">0</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-label"><i class="fas fa-file-csv"></i> Uploads</div>
+            <strong id="totalUploads">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card span-7 chart-card reveal">
+        <span class="eyebrow"><i class="fas fa-chart-simple"></i> Prediction Analytics</span>
+        <h2 class="section-title">Monthly Prediction Volume</h2>
+        <div class="chart-area">
+          <canvas id="adminChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card span-5 reveal stagger-1">
+        <span class="eyebrow"><i class="fas fa-bolt"></i> Admin Insights</span>
+        <h2 class="section-title">Platform Health</h2>
+        <div class="feature-list">
+          <span><i class="fas fa-circle-check"></i> Dataset uploads measure how often the model is being refreshed</span>
+          <span><i class="fas fa-circle-check"></i> Prediction volume highlights user engagement with the forecasting workflow</span>
+          <span><i class="fas fa-circle-check"></i> Recent account and forecast tables help explain activity during demos</span>
+        </div>
+      </section>
+
+      <section class="card span-6 table-card reveal">
+        <span class="eyebrow"><i class="fas fa-user-plus"></i> Recent Users</span>
+        <h2 class="section-title">New Accounts</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card span-6 table-card reveal stagger-2">
+        <span class="eyebrow"><i class="fas fa-clock"></i> Recent Predictions</span>
+        <h2 class="section-title">Latest Forecasts</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Predicted Sales</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody id="adminPredictionsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>
